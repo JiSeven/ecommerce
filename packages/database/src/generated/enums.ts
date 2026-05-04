@@ -9,56 +9,10 @@
 * 🟢 You can import this file directly.
 */
 
-export const Role = {
-  CUSTOMER: 'CUSTOMER',
-  VENDOR: 'VENDOR',
-  ADMIN: 'ADMIN',
-  SUPER_ADMIN: 'SUPER_ADMIN'
-} as const
-
-export type Role = (typeof Role)[keyof typeof Role]
-
-
 export const OAuthProvider = {
-  LOCAL: 'LOCAL',
   GOOGLE: 'GOOGLE',
-  GITHUB: 'GITHUB'
+  GITHUB: 'GITHUB',
+  LOCAL: 'LOCAL'
 } as const
 
 export type OAuthProvider = (typeof OAuthProvider)[keyof typeof OAuthProvider]
-
-
-export const OrderStatus = {
-  PENDING: 'PENDING',
-  PAYMENT_PROCESSING: 'PAYMENT_PROCESSING',
-  PAYMENT_FAILED: 'PAYMENT_FAILED',
-  CONFIRMED: 'CONFIRMED',
-  PROCESSING: 'PROCESSING',
-  SHIPPED: 'SHIPPED',
-  DELIVERED: 'DELIVERED',
-  CANCELLED: 'CANCELLED',
-  REFUNDED: 'REFUNDED'
-} as const
-
-export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
-
-
-export const PaymentStatus = {
-  PENDING: 'PENDING',
-  PROCESSING: 'PROCESSING',
-  SUCCEEDED: 'SUCCEEDED',
-  FAILED: 'FAILED',
-  REFUNDED: 'REFUNDED',
-  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
-} as const
-
-export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
-
-
-export const AddressType = {
-  SHIPPING: 'SHIPPING',
-  BILLING: 'BILLING',
-  BOTH: 'BOTH'
-} as const
-
-export type AddressType = (typeof AddressType)[keyof typeof AddressType]
