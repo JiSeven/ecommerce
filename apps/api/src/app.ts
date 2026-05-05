@@ -5,6 +5,8 @@ import { env } from './config/env';
 import fastifyCors from '@fastify/cors';
 import prismaPlugin from './plugins/prisma';
 import jwtPlugin from './plugins/jwt';
+import errorHandler from './plugins/error-handler';
+import { authRoutes } from './modules/auth/auth.routes';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = fastify({
@@ -28,6 +30,9 @@ export async function buildApp(): Promise<FastifyInstance> {
     status: 'ok',
     timestamp: new Date().toISOString(),
   }));
+
+  await app.register(errorHandler);
+  await app.register(authRoutes, { prefix: '/auth' });
 
   return app;
 }

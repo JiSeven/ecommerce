@@ -5,8 +5,8 @@ import dotenvExpand from 'dotenv-expand';
 
 const rootEnvPath = path.resolve(__dirname, '../../../../.env');
 
-dotenv.config({ path: rootEnvPath });
-dotenvExpand.expand(dotenv.config());
+const currentEnv = dotenv.config({ path: rootEnvPath });
+dotenvExpand.expand(currentEnv);
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
