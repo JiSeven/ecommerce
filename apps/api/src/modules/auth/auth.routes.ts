@@ -1,8 +1,12 @@
 import { FastifyInstance } from 'fastify';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { registerSchema } from './auth.schema';
+import { loginSchema, registerSchema } from './auth.schema';
 import z from 'zod';
+
+const verifyEmailSchema = z.object({
+  code: z.string().length(6).regex(/^\d+$/, 'Code must be 6 digits'),
+});
 
 export async function authRoutes(app: FastifyInstance) {
   const service = new AuthService(app);
@@ -24,4 +28,13 @@ export async function authRoutes(app: FastifyInstance) {
     },
     handler: controller.register.bind(controller),
   });
+
+  app.post('/login', {
+    schema: {
+      body: z.toJSONSchema(loginSchema, { target: 'draft-7' }),
+    },
+    handler: controller.login.bind(controller),
+  });
+
+  // TODO: OTP handlers
 }

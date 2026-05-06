@@ -24,7 +24,15 @@ const envSchema = z.object({
   GITHUB_CLIENT_ID: z.string().optional(),
   GITHUB_CLIENT_SECRET: z.string().optional(),
 
-  CLIENT_URL: z.string().url().default('http://localhost:5173'),
+  CLIENT_URL: z.url().default('http://localhost:5173'),
+
+  REDIS_URL: z.url(),
+
+  SMTP_HOST: z.string().optional(),
+  SMTP_PORT: z.coerce.number().optional(),
+  SMTP_USER: z.string().optional(),
+  SMTP_PASSWORD: z.string().optional(),
+  EMAIL_FROM: z.string().default('noreply@ecommerce.dev'),
 });
 
 export const env = envSchema.parse(process.env);

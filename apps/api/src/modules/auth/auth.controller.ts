@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { AuthService } from './auth.service';
-import { RegisterInput } from './auth.schema';
+import { LoginInput, RegisterInput } from './auth.schema';
 
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -12,6 +12,26 @@ export class AuthController {
       id: user.id,
       email: user.email,
       name: user.name,
+    });
+  }
+
+  // TODO: OTP handlers
+
+  async login(req: FastifyRequest<{ Body: LoginInput }>, reply: FastifyReply) {
+    const { user, tokens } = await this.authService.login(req.body, {
+      userAgent: req.headers['user-agent'],
+      ipAddress: req.ip,
+    });
+
+    // TODO: set refresh cookie
+
+    return reply.send({
+      accessToken: tokens.accessToken,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+      },
     });
   }
 }

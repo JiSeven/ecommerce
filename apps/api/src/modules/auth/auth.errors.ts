@@ -1,4 +1,4 @@
-import { DomainError } from './domain-error';
+import { DomainError } from '../../errors/domain-error';
 
 export class InvalidCredentialsError extends DomainError {
   constructor() {
@@ -21,5 +21,23 @@ export class TokenInvalidError extends DomainError {
 export class EmailTakenError extends DomainError {
   constructor() {
     super('CREDENTIALS_INVALID', 401, 'Invalid email or password');
+  }
+}
+
+export class InvalidOtpError extends DomainError {
+  constructor() {
+    super('OTP_INVALID', 400, 'Invalid or expired verification code');
+  }
+}
+
+export class EmailAlreadyVerifiedError extends DomainError {
+  constructor() {
+    super('EMAIL_ALREADY_VERIFIED', 400, 'Email is already verified');
+  }
+}
+
+export class OtpRateLimitError extends DomainError {
+  constructor() {
+    super('OTP_RATE_LIMIT', 429, 'Please wait before requesting a new code');
   }
 }

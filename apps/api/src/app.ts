@@ -4,6 +4,7 @@ import helmet from '@fastify/helmet';
 import { env } from './config/env';
 import fastifyCors from '@fastify/cors';
 import prismaPlugin from './plugins/prisma';
+import redisPlugin from './plugins/redis';
 import jwtPlugin from './plugins/jwt';
 import errorHandler from './plugins/error-handler';
 import { authRoutes } from './modules/auth/auth.routes';
@@ -25,6 +26,7 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   await app.register(prismaPlugin);
   await app.register(jwtPlugin);
+  await app.register(redisPlugin);
 
   app.get('/health', async () => ({
     status: 'ok',

@@ -10,8 +10,8 @@ export default fp(async function jwtPlugin(app: FastifyInstance) {
   await app.register(fastifyJwt, {
     secret: env.JWT_ACCESS_SECRET,
     namespace: 'access',
-    jwtVerify: 'accessVerify',
-    jwtSign: 'accessSign',
+    jwtVerify: 'accessTokenVerify',
+    jwtSign: 'accessTokenSign',
     sign: {
       expiresIn: env.JWT_ACCESS_EXPIRES_IN,
     },
@@ -20,8 +20,8 @@ export default fp(async function jwtPlugin(app: FastifyInstance) {
   await app.register(fastifyJwt, {
     secret: env.JWT_REFRESH_SECRET,
     namespace: 'refresh',
-    jwtVerify: 'refreshVerify',
-    jwtSign: 'refreshSign',
+    jwtVerify: 'refreshTokenVerify',
+    jwtSign: 'refreshTokenSign',
     cookie: {
       cookieName: 'refreshToken',
       signed: false,
